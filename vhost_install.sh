@@ -8,6 +8,11 @@ read -e -p 'IP of the site : ' -i '127.0.0.1' siteip
 # Add the register in /etc/hosts:
 sed -i -e '$a'$siteip' '$sitename /etc/hosts
 
+# Check if /etc/httpd/conf/vhosts exist if not create
+if [ ! -d /etc/httpd/conf/vhosts ]; then
+	mkdir /etc/httpd/conf/vhosts
+fi
+
 # Copy conf file to vhosts directory
 cp virtualhost_conf /etc/httpd/conf/vhosts/$sitename
 
