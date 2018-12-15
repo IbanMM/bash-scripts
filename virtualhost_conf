@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+    ServerAdmin agnosix@gmail.com
+    DocumentRoot "/srv/http/_site_"
+    ServerName _site_
+    ServerAlias _site_
+    ErrorLog "/var/log/httpd/_site_-error_log"
+    CustomLog "/var/log/httpd/_site_-access_log" common
+
+    <Directory "/srv/http/_site_">
+        Require all granted
+    </Directory>
+</VirtualHost>
+
