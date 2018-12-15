@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-    ServerAdmin agnosix@gmail.com
+    ServerAdmin iban.moreno.martin@gmail.com
     DocumentRoot "/srv/http/_site_"
     ServerName _site_
     ServerAlias _site_
