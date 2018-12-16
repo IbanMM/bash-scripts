@@ -49,6 +49,8 @@ wp core install --url=$wpurl --title=$wptitle --admin_user=$wpadmin --admin_pass
 echo $BOLD$GREEN'Wordpress installed correctly, lets install some plugins ...'$CLEAR
 
 # WordPress Plugins
+
+# Timber
 read -p 'Do you want to install Timber (y/n) : ' installtimber
 
 if [ $installtimber = 'y' ]
@@ -61,4 +63,11 @@ then
 	sed -i -e 's/Starter Theme to use with Timber/'$wptitle'/g'  $wppath'/wp-content/themes/'$timbertheme'/style.css'
 	sed -i -e 's/Upstatement and YOU!/'$wpadminemail'/g'  $wppath'/wp-content/themes/'$timbertheme'/style.css'
 	wp theme activate $timbertheme
+fi
+
+# iThemes Security
+read -p 'Do you want to install iThemes Security (y/n) : ' installithemes
+if [ $installithemes = 'y' ]
+then
+	wp plugin install better-wp-security --activate
 fi
