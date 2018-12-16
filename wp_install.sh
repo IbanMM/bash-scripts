@@ -46,4 +46,19 @@ read -p 'Email of the admin user : ' wpadminemail
 read -p 'Password for the admin user : ' wpadminpassword 
 wp core install --url=$wpurl --title=$wptitle --admin_user=$wpadmin --admin_password='$wpadminpassword' --admin_email=$wpadminemail
 
-echo $BOLD$GREEN'Wordpress installed correctly, lets install some plugins'$CLEAR
+echo $BOLD$GREEN'Wordpress installed correctly, lets install some plugins ...'$CLEAR
+
+# WordPress Plugins
+read -p 'Do you want to install Timber (y/n) : ' installtimber
+
+if [ $installtimber = 'y' ]
+then
+	read -p 'Name for the Timber Starter Theme : ' timbertheme
+	wp plugin install timber-library --activate
+	cp -r $wppath'/wp-content/plugins/timber-library/timber-starter-theme' $wppath'/wp-content/themes'
+	mv $wppath'/wp-content/themes/timber-starter-theme' $wppath'/wp-content/themes/'$timbertheme
+	sed -i -e 's/My Timber Starter Theme/'$timbertheme'/g'  $wppath'/wp-content/themes/'$timbertheme'/style.css'
+	sed -i -e 's/Starter Theme to use with Timber/'$wptitle'/g'  $wppath'/wp-content/themes/'$timbertheme'/style.css'
+	sed -i -e 's/Upstatement and YOU!/'$wpadminemail'/g'  $wppath'/wp-content/themes/'$timbertheme'/style.css'
+	wp theme activate $timbertheme
+fi
