@@ -5,6 +5,7 @@
 # Colors for the outputs uses tput
 GREEN="$(tput setaf 2)"
 CLEAR="$(tput sgr0)"
+BOLD="$(tput bold)"
 
 # User input path for the installation folder
 read -e -p 'Path to install WP (absolute) : ' -i '/srv/http/' wppath
@@ -23,7 +24,7 @@ SQL4="FLUSH PRIVILEGES;"
 
 mysql -h localhost -u root -p$mysqlpassword -Bse "$SQL1$SQL2$SQL3$SQL4"
 
-echo $GREEN'Database created correctly'$CLEAR
+echo $BOLD$GREEN'Database created correctly'$CLEAR
 
 # cd in the target folder for the WP installation
 cd $wppath
@@ -33,7 +34,9 @@ read -e -p 'Locale for the WordPress installation : ' -i 'es_ES' wplocale
 wp core download --locale=$wplocale
 
 # Generate wp-config.php
-wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword --locale=$wplocale
+PREFIX=$(echo  "${dbname}" | head -c2)
+read -e -p 'Prefix for the database tables (Do not use wp_) : ' -i "$PREFIX"'_' wpprefix
+wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword --locale=$wplocale --dbprefix=$wpprefix
 
 # Install WP
 read -p 'URL for the WordPress installation : ' wpurl
@@ -42,3 +45,5 @@ read -p 'User name for admin user : ' wpadmin
 read -p 'Email of the admin user : ' wpadminemail
 read -p 'Password for the admin user : ' wpadminpassword 
 wp core install --url=$wpurl --title=$wptitle --admin_user=$wpadmin --admin_password='$wpadminpassword' --admin_email=$wpadminemail
+
+echo $BOLD$GREEN'Wordpress installed correctly, lets install some plugins'$CLEAR
