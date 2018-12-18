@@ -8,7 +8,7 @@ CLEAR="$(tput sgr0)"
 BOLD="$(tput bold)"
 
 # User input path for the installation folder
-read -e -p 'Path to install WP (absolute) : ' -i '/srv/http/' wppath
+read -e -p 'Path to install WP (absolute, no / at the end) : ' -i '/srv/http/' wppath
 
 # Database creation
 echo 'Lest create a database for WordPress'
@@ -39,7 +39,7 @@ read -e -p 'Prefix for the database tables (Do not use wp_) : ' -i "$PREFIX"'_' 
 wp config create --dbname=$dbname --dbuser=$dbuser --dbpass=$dbpassword --locale=$wplocale --dbprefix=$wpprefix
 
 # Install WP
-read -p 'URL for the WordPress installation : ' wpurl
+read -p 'URL for the WordPress installation (without http://) : ' wpurl
 read -p 'Title for the WordPress installation : ' wptitle
 read -p 'User name for admin user : ' wpadmin
 read -p 'Email of the admin user : ' wpadminemail
@@ -71,3 +71,14 @@ if [ $installithemes = 'y' ]
 then
 	wp plugin install better-wp-security --activate
 fi
+
+# WP Super Cache
+read -p 'Do you want to install Wp Super cache (y/n) : ' installcache
+if [ $installcache = 'y' ]
+then
+	wp plugin install wp-super-cache --activate
+fi
+
+# File & Folder permissions
+find . -type d -exec chmod 775 {} \; && find . -type f -exec chmod 664 {} \;
+echo $BOLD$GREEN'All done OK, permissions OK, your site is ready in --> http://'$wpurl$CLEAR
