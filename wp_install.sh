@@ -8,7 +8,7 @@ CLEAR="$(tput sgr0)"
 BOLD="$(tput bold)"
 
 # User input path for the installation folder
-read -e -p 'Path to install WP (absolute, no / at the end) : ' -i '/srv/http/' wppath
+read -p 'Path to install WP (absolute, no / at the end) : ' -i '/srv/http/' wppath
 
 # Database creation
 echo 'Lest create a database for WordPress'
@@ -30,7 +30,7 @@ echo $BOLD$GREEN'Database created correctly'$CLEAR
 cd $wppath
 
 # Download WP
-read -e -p 'Locale for the WordPress installation : ' -i 'es_ES' wplocale
+read -e -p 'Locale for the WordPress installation : ' -i 'en_US' wplocale
 wp core download --locale=$wplocale
 
 # Generate wp-config.php
@@ -77,6 +77,13 @@ read -p 'Do you want to install Wp Super cache (y/n) : ' installcache
 if [ $installcache = 'y' ]
 then
 	wp plugin install wp-super-cache --activate
+fi
+
+# Contact Form 7
+read -p 'Do you want to install Contact Form 7 (y/n): ' installcontactform
+if [ $installcontactform = 'y' ]
+then
+	wp plugin install contact-form-7 contact-form-cfdb7  --activate
 fi
 
 # File & Folder permissions
