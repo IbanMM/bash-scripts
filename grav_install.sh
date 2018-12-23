@@ -25,4 +25,10 @@ bin/grav install
 # Install admin plugin and dependencies
 bin/gpm install admin
 
-echo $BOLD$GREEN'All done OK, your GRAV site is ready'$CLEAR
+# Fix Permissions
+find . -type f | xargs chmod 664
+find ./bin -type f | xargs chmod 775
+find . -type d | xargs chmod 775
+find . -type d | xargs chmod +s
+
+echo $BOLD$GREEN'All done OK, permissions fixed, your GRAV site is ready'$CLEAR
