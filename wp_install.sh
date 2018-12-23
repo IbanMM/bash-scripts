@@ -8,7 +8,7 @@ CLEAR="$(tput sgr0)"
 BOLD="$(tput bold)"
 
 # User input path for the installation folder
-read -p 'Path to install WP (absolute, no / at the end) : ' -i '/srv/http/' wppath
+read -e -p 'Path to install WP (absolute, no / at the end) : ' -i '/srv/http/' wppath
 
 # Database creation
 echo 'Lest create a database for WordPress'
@@ -86,6 +86,13 @@ then
 	wp plugin install contact-form-7 contact-form-cfdb7  --activate
 fi
 
+# Apache user
+APACHE_USER=$(ps axho user,comm|grep -E "httpd|apache"|uniq|grep -v "root"|awk 'END {if ($1) print $1}')
+
+# Fix Permissions
+sudo chown -R $USER':'$APACHE_USER .
+
 # File & Folder permissions
 find . -type d -exec chmod 775 {} \; && find . -type f -exec chmod 664 {} \;
+
 echo $BOLD$GREEN'All done OK, permissions OK, your site is ready in --> http://'$wpurl$CLEAR

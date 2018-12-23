@@ -8,7 +8,7 @@ CLEAR="$(tput sgr0)"
 BOLD="$(tput bold)"
 
 # User input path for the installation folder
-read -p 'Path to install Grav (absolute, no / at the end) : ' -i '/srv/http/' gravpath
+read -e -p 'Path to install Grav (absolute, no / at the end) : ' -i '/srv/http/' gravpath
 
 # cd in the target folder for the Grav installation
 cd $gravpath
@@ -25,7 +25,11 @@ bin/grav install
 # Install admin plugin and dependencies
 bin/gpm install admin
 
+# Apache user
+APACHE_USER=$(ps axho user,comm|grep -E "httpd|apache"|uniq|grep -v "root"|awk 'END {if ($1) print $1}')
+
 # Fix Permissions
+sudo chown -R $USER':'$APACHE_USER .
 find . -type f | xargs chmod 664
 find ./bin -type f | xargs chmod 775
 find . -type d | xargs chmod 775
