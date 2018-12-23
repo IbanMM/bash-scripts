@@ -22,7 +22,7 @@ composer install --no-dev -o
 # Install the plugin and theme dependencies by using the Grav CLI application
 bin/grav install
 
-# Install admin plugin and dependecies
+# Install admin plugin and dependencies
 bin/gpm install admin
 
 echo $BOLD$GREEN'All done OK, your GRAV site is ready'$CLEAR
