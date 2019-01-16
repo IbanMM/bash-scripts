@@ -30,7 +30,7 @@ APACHE_USER=$(ps axho user,comm|grep -E "httpd|apache"|uniq|grep -v "root"|awk '
 
 # Set Up
 touch setup.php
-sed -i -e '$a<?php' setup.php
+echo "<?php" > setup.php
 sed -i -e '$aumask(0002);' setup.php
 
 # Fix Permissions
