@@ -28,6 +28,11 @@ bin/gpm install admin
 # Apache user
 APACHE_USER=$(ps axho user,comm|grep -E "httpd|apache"|uniq|grep -v "root"|awk 'END {if ($1) print $1}')
 
+# Set Up
+touch setup.php
+sed -i -e '$a<?php' setup.php
+sed -i -e '$aumask(0002);' setup.php
+
 # Fix Permissions
 sudo chown -R $USER':'$APACHE_USER .
 find . -type f | xargs chmod 664
