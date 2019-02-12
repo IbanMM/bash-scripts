@@ -86,6 +86,13 @@ then
 	wp plugin install contact-form-7 contact-form-cfdb7  --activate
 fi
 
+# YOAST
+read -p 'Do you want to install YOAST Seo (y/n): ' installyoast
+if [ $installyoast = 'y' ]
+then
+    wp plugin install wordpress-seo --activate
+fi
+
 # Apache user
 APACHE_USER=$(ps axho user,comm|grep -E "httpd|apache"|uniq|grep -v "root"|awk 'END {if ($1) print $1}')
 
