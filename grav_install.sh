@@ -8,7 +8,7 @@ CLEAR="$(tput sgr0)"
 BOLD="$(tput bold)"
 
 # User input path for the installation folder
-read -e -p 'Path to install Grav (absolute, no / at the end) : ' -i '/srv/http/' gravpath
+read -e -p 'Path to install Grav (absolute, no / at the end) : ' -i '/home/veiss/historico3/' gravpath
 
 # cd in the target folder for the Grav installation
 cd $gravpath

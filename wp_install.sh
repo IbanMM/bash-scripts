@@ -8,7 +8,7 @@ CLEAR="$(tput sgr0)"
 BOLD="$(tput bold)"
 
 # User input path for the installation folder
-read -e -p 'Path to install WP (absolute, no / at the end) : ' -i '/srv/http/' wppath
+read -e -p 'Path to install WP (absolute, no / at the end) : ' -i '/home/veiss/historico3/' wppath
 
 # Database creation
 echo 'Lest create a database for WordPress'
