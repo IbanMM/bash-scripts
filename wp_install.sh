@@ -86,6 +86,14 @@ then
 	wp plugin install contact-form-7 contact-form-cfdb7  --activate
 fi
 
+
+# Rank Math 
+read -p 'Do you want to install Rank Math (y/n): ' installrankmath
+if [ $installrankmath = 'y' ]
+then
+  wp plugin install seo-by-rank-math --activate
+fi
+
 # YOAST
 read -p 'Do you want to install YOAST Seo (y/n): ' installyoast
 if [ $installyoast = 'y' ]
