@@ -44,7 +44,7 @@ read -p 'Title for the WordPress installation : ' wptitle
 read -p 'User name for admin user : ' wpadmin
 read -p 'Email of the admin user : ' wpadminemail
 read -p 'Password for the admin user : ' wpadminpassword 
-wp core install --url=$wpurl --title=$wptitle --admin_user=$wpadmin --admin_password='$wpadminpassword' --admin_email=$wpadminemail
+wp core install --url=$wpurl --title=$wptitle --admin_user=$wpadmin --admin_password=$wpadminpassword --admin_email=$wpadminemail
 
 echo $BOLD$GREEN'Wordpress installed correctly, lets install some plugins ...'$CLEAR
 
