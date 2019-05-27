@@ -30,7 +30,7 @@ if [ ! -f /etc/apache2/sites-available/$sitename.local.conf ]; then
 
 	cp /etc/apache2/sites-available/1-plantilla.local.conf /etc/apache2/sites-available/$sitename.local.conf
 	# Search and replace in the created conf file
-	sed -i -e 's/____nombreproyecto____/'$sitename'/g' /etc/httpd/conf/vhosts/$sitename
+	sed -i -e 's/____nombreproyecto____/'$sitename'/g' /etc/apache2/sites-available/$sitename.local.conf
 	# Enable site for apache2
 	a2ensite $sitename.local.conf
 
